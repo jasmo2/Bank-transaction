@@ -12,5 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+ //= require semantic-ui
+//= require semantic-ui/modal
+//= require semantic-ui/dropdown
 //= require turbolinks
 //= require_tree .
+
+
+$( document ).ready(function() {
+	$('.ui.dropdown').dropdown();
+	});

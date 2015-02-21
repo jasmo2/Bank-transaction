@@ -1,0 +1,93 @@
+
+<h1>Transfer session</h1>
+  
+<div class="ui two column middle aligned relaxed fitted stackable grid">
+  <div class="column">
+  	<%= form_for @transference,url: transfers_path(:sender_id,:receiver_id), html: { class: "ui form segment error" } do |f|  %>
+	<div class="two fields">
+		<div class="field">
+			<label>Sender Name</label>
+			<div class="ui selection dropdown">
+				<input type="hidden" name="transfer[sender_id]">
+				<div class="default text">Sender name</div>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+				  <%if !@users.blank? 
+				     for user in @users %>
+				      <div class="item" data-value="<%= user.id %>"><%=user.name%></div>
+				  <% end 
+				    end %>
+				</div>
+
+			</div>
+      	</div>
+      	<div class="field">
+			<label>Reciever Name</label>
+			<div class="ui selection dropdown">
+				<input type="hidden" name="transfer[reciever_id]">
+				<div class="default text">Reciever name</div>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+				  <%if !@users.blank? 
+				     for user in @users %>
+				      <div class="item" data-value="<%= user.id %>"><%=user.name%></div>
+				  <% end 
+				    end %>
+				</div>
+			</div>
+      	</div>
+
+	</div>
+      <div class="field">
+        <label>Amount to transfer</label>
+        <div class="ui left icon input">
+          <%= f.number_field :amount%>
+          <i class="lock icon"></i>
+        </div>
+      </div>
+	  <div class="two fields">
+	      <div class="field ">
+		      <div class="ui right icon input">
+			  	<input type="submit" name="commit" value="Transfer" class="ui button blue">
+				<i class="money icon"></i>
+		      	
+		      </div>
+	      </div>
+	  </div>
+     
+    <%end%>
+  </div>
+
+
+
+	<%if flash[:notice]  || @transference.errors.any?%>
+		
+	  <div class="ui vertical divider">
+	  	<i class="external share icon large"></i>
+	  </div>
+
+	<%end%>
+
+  <div class="center aligned column">
+  	<% if @transference.errors.any? %>
+	  	<div class="ui error message">
+	  	  <div class="header">
+	  	  	<%= pluralize(@transference.errors.count, "error") %> prohibited this expense from being saved:Action this transaction from been save:
+	  	  </div>
+	  	  <ul>
+			<%@transference.errors.full_messages.each do |message|%>
+	  	  		<li><%=	message %></li>
+			<%end%>
+	  	  </ul>
+	  	</div>
+	<% end %>
+	<%if notice %>
+	    <div class="ui positive message">
+	      <div class="header">
+	        Transered
+	      </div>
+	      <p><%=notice%></p>
+	    </div>
+	<%end%>
+  </div>
+</div>

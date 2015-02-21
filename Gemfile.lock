@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/doabit/semantic-ui-sass.git
+  revision: d43beca346cb74f0c3e27212f8acd4f31e1e1629
+  specs:
+    semantic-ui-sass (0.19.3.1)
+      sass (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -56,6 +63,8 @@ GEM
     debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.3.0)
+    faker (1.4.3)
+      i18n (~> 0.5)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     hike (1.2.3)
@@ -152,11 +161,13 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
+  faker (~> 1.4.3)
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  semantic-ui-sass!
   spring
   sqlite3
   turbolinks

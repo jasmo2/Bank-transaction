@@ -7,5 +7,7 @@ class CreateTransfers < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_foreign_key :users, column: :sender_id
+    add_foreign_key :users, column: :reciever_id
   end
 end
