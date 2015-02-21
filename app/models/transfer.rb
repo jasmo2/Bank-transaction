@@ -10,13 +10,19 @@ class Transfer < ActiveRecord::Base
 	-Una transferencia no se debe poder actualizar ni eliminar.
 =end
 	
-end
 	belongs_to :sender, class_name: "User", foreign_key: "sender_id"
 	belongs_to :reciever, class_name: "User", foreign_key: "reciever_id"
 
 	validates :sender_id, :reciever_id, presence: true
 	validates :amount, numericality: true
 
-	after_create
+	after_create :newBalance
+	 protected
+    def newBalance
+       sender = User.find(:sender_id)
+       reciever = User.find(:reciever_id)
+       sender.balance = sender.balance - self.amount
+       reciever.balance = reciever.balance + self.amount
+    end
 	
 end

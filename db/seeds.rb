@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.delete_all
 for user in 1...9
-	User.create(id: user, name: Faker::Name.name, balance: Faker::Number.number(5))
+	User.create(id: user, name: Faker::Name.name)
 end
