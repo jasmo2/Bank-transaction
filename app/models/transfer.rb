@@ -9,7 +9,8 @@ class Transfer < ActiveRecord::Base
 
 	-Una transferencia no se debe poder actualizar ni eliminar.
 =end
-	
+	before_destroy { |record| raise ReadOnlyRecord }
+	before_update :prevent_update
 	belongs_to :sender, class_name: "User", foreign_key: "sender_id"
 	belongs_to :reciever, class_name: "User", foreign_key: "reciever_id"
 
@@ -34,5 +35,8 @@ class Transfer < ActiveRecord::Base
 
      
     end
+    def prevent_update
+	    self.errors.add_to_base "Cannot update a #{ self.to_s }"
+  	end
 	
 end
