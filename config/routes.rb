@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'transfer#index'
-  get  '/',to: 'transfer#index', as: 'index'
-  post  '/:sender_id/:receiver_id',to: 'transfer#transfer', as: 'transfers'
+  root to: 'transfers#index'
+  get  '/',to: 'transfers#index', as: 'index'
+  post  '/:sender_id/:receiver_id',to: 'transfers#transfer', as: 'transfers'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

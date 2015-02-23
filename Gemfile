@@ -37,7 +37,7 @@ gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem 'rspec-rails'
   #to seed in test enviroment
   gem 'faker', '~> 1.4.3'
   # Access an IRB console on exception pages or by using <%= console %> in views

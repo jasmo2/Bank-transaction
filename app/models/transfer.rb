@@ -16,13 +16,23 @@ class Transfer < ActiveRecord::Base
 	validates :sender_id, :reciever_id, presence: true
 	validates :amount, numericality: true
 
-	after_create :newBalance
-	 protected
+	after_save :newBalance
+	protected
     def newBalance
+=begin
+	because I already have the "belogns_to"
        sender = User.find(:sender_id)
        reciever = User.find(:reciever_id)
+=end
+
        sender.balance = sender.balance - self.amount
        reciever.balance = reciever.balance + self.amount
+       # byebug
+
+		sender.save!
+	  	reciever.save!
+
+     
     end
 	
 end

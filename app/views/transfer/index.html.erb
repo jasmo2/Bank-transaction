@@ -60,7 +60,7 @@
 
 
 
-	<%if flash[:notice]  || @transference.errors.any?%>
+	<%if flash[:notice]  || flash[:error]  || @transference.errors.any?%>
 		
 	  <div class="ui vertical divider">
 	  	<i class="external share icon large"></i>
@@ -87,6 +87,14 @@
 	        Transered
 	      </div>
 	      <p><%=notice%></p>
+	    </div>
+	<%end%>
+	<%if error %>
+	    <div class="ui positive message">
+	      <div class="header">
+	        Transered
+	      </div>
+	      <p><%=error%></p>
 	    </div>
 	<%end%>
   </div>
