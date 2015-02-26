@@ -9,8 +9,8 @@ class Transfer < ActiveRecord::Base
 
 	-Una transferencia no se debe poder actualizar ni eliminar.
 =end
-	before_destroy { |record| raise ReadOnlyRecord }
-	before_update :prevent_update
+	before_destroy :prevent_update_or_destroy
+	before_update :prevent_update_or_destroy
 	belongs_to :sender, class_name: "User", foreign_key: "sender_id"
 	belongs_to :reciever, class_name: "User", foreign_key: "reciever_id"
 
@@ -25,18 +25,14 @@ class Transfer < ActiveRecord::Base
        sender = User.find(:sender_id)
        reciever = User.find(:reciever_id)
 =end
-
-       sender.balance = sender.balance - self.amount
-       reciever.balance = reciever.balance + self.amount
-       # byebug
-
+		sender.balance = sender.balance - self.amount
+		reciever.balance = reciever.balance + self.amount
 		sender.save!
-	  	reciever.save!
-
-     
+		reciever.save!
     end
-    def prevent_update
-	    self.errors.add_to_base "Cannot update a #{ self.to_s }"
+    def prevent_update_or_destroy
+	    # self.errors.add_to_base "Cannot update a #{ self.to_s }"
+	    raise ActiveRecord::ReadOnlyRecord
   	end
 	
 end
