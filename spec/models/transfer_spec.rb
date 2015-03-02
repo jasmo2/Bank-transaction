@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Transfer, type: :model do
+
   it do
   	sender = User.create(name: "Simon")
   	reciever = User.create(name: "Jaime")
@@ -29,6 +30,13 @@ RSpec.describe Transfer, type: :model do
   	reciever = User.create(name: "Jaime")
   	transference = Transfer.create(sender_id: sender.id,reciever: reciever,amount: 30000)
     expect{transference.destroy!}.to raise_exception(ActiveRecord::ReadOnlyRecord)
-
   end
+  
+  it "should require a number input" do
+    sender = User.create(name: "Simon")
+    reciever = User.create(name: "Jaime")
+    transfer = Transfer.create(sender_id: sender.id,reciever_id: reciever.id,amount: -50000)
+    expect(transfer.errors[:amount]).to_not eq(nil) 
+  end
+
 end

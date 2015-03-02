@@ -19,8 +19,6 @@ class TransfersController < ApplicationController
   	  end
     rescue
       flash[:error] = "Something wrong happened"
-      # flas[:SenderBalance] = @users.where()
-      # flas[:RecieverBalance] = 
       redirect_to action: "index" 
     end
   end

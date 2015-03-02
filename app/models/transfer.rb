@@ -15,7 +15,7 @@ class Transfer < ActiveRecord::Base
 	belongs_to :reciever, class_name: "User", foreign_key: "reciever_id"
 
 	validates :sender_id, :reciever_id, presence: true
-	validates :amount, numericality: true
+	validates :amount, numericality: { :greater_than_or_equal_to => 0  }
 
 	after_save :newBalance
 	protected
